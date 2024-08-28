@@ -69,72 +69,26 @@ match option_chosen:
 
 <a name="store_data"></a>
 ### Store_Data
-This function is structured for storing the data of new users into the file in a project's directory <em>"Storage"</em> dir.
+This function is structured for storing the data of new users into the file into a <ins>Pod's Volume</ins>. <br>
 It defined where the data will be stored (the path is harded code inside the code).
 
 ```
-# This is the PATH inside the Project Directory (current directory)
-# -> Python_App_Using_Kubernetes/Store_Data/Store_data.py
-absolutepath = os.path.abspath(__file__)
+# This is the PATH inside the Docker Container Volume
+path_volume_docker = "/Docker_Directory/Storage/User_Data.txt"
 
-# Go up one level -> Python_App_Using_Kubernetes/Store_Data
-one_level_up = os.path.dirname(absolutepath)
+# Going one level up -> /Docker_Directory/Storage/
+directory_storage = os.path.dirname(path_volume_docker)
 
-# Go up two levels -> Python_App_Using_Kubernetes
-two_level_up = os.path.dirname(one_level_up)
-
-# Check if the directory inside the project exist or not.
-# In case it doesn't exist, it is created.
-directory_storage = os.path.join(two_level_up, "Storage")
-
-# Name of the file will contain the user's data.
-file_name = "Data_Users.txt"
-
-# Path of the txt file where the user's data will stored
-file_path = os.path.join(directory_storage, file_name)
-
-if not os.path.exists(directory_storage):
-    os.makedirs(directory_storage)
-    print(f"Created directory: {directory_storage}")
-```
-
-The "<ins>/Docker_Directory/Python_App_Using_Kubernetes/Storage/Data_Users.txt</ins>" will be the path where the file "Data_Users.txt" will store data.
-
-<a name="view_data"></a>
-### View_Data
-Thsi function is used to view all the users are stored inside (/Docker_Directory/Python_App_Using_Kubernetes//Storage/User_Data.txt).<br>
-It be defined the path of directory where the data has been stored (the path is harded code inside the code).
-
-```
-# This is the PATH inside the Project Directory (current directory)
-# -> Python_App_Using_Kubernetes/Store_Data/Store_data.py
-absolutepath = os.path.abspath(__file__)
-
-# Go up one level -> Python_App_Using_Kubernetes/Store_Data
-one_level_up = os.path.dirname(absolutepath)
-
-# Go up two levels -> Python_App_Using_Kubernetes
-two_level_up = os.path.dirname(one_level_up)
-
-# Check if the directory inside the project exist or not.
-# In case it doesn't exist, it is created.
-directory_storage = os.path.join(two_level_up, "Storage")
-
-# Name of the file will contain the user's data.
-file_name = "Data_Users.txt"
-
-# Path of the txt file where the user's data will stored
-file_path = os.path.join(directory_storage, file_name)
-
+# Check if the directory inside the volume exist or not.
 if not os.path.exists(directory_storage):
     print(f"The directory {directory_storage} was not found")
-```
 
-```
-with open(file_path, 'r') as storage_file:
-    content = storage_file.read()
-    print("List Users:", end="\n")
-    print(content)
+# Try statesman to read all the file "USER_DATA" into the Docker volume
+try:
+    with open(path_volume_docker, 'r') as storage_file:
+        content = storage_file.read()
+        print("List Users:", end="\n")
+        print(content)
 ```
 
 ---
@@ -158,8 +112,7 @@ In this image it used the following commands:
 - CMD
 
 The <strong> FROM </strong> command it used to pull all dependenties based on the image that we pass as a parameter.<br>
-In this case, we defined an image for a Python application, therefore with this command, we pull oll the dependenties
-from the <ins>official</ins> [Python Image](https://hub.docker.com/_/python), stored in
+In this case, we defined an image for a Python application, therefore with this command, we pull oll the dependenties from the <ins>official</ins> [Python Image](https://hub.docker.com/_/python), stored in
 the [Docker Hub](https://hub.docker.com).
 
 ```
@@ -212,8 +165,7 @@ CMD ["python", "./Main_Code/main.py"]
 --
 <a name="build_image"></a>
 ### Build Docker Image
-To build image, you must use the <strong> BUILD </strong> command, and pass where the dockerfile is stored, as a
-parameter.<br>
+To build image, you must use the <strong> BUILD </strong> command, and pass where the dockerfile is stored, as a parameter.<br>
 It be the result.<br>
 
 ```
@@ -278,6 +230,17 @@ Specifically, they can describe:
 - The policies around how those applications behave, such as restart policies, upgrades, and fault-tolerance
 
 For more detail: [Kubernetes Objects](https://kubernetes.io/docs/concepts/overview/working-with-objects/)
+
+--
+<a name="kube_volumes_emptydir"></a>
+## Kubernetes Volumes EmptyDir {}
+The Kubernetes offers the possibilities to store data in a Volume.<br>
+In this case it used the <mark>EmptyDir {} Volume.</mark>.<br>
+For a Pod that defines an EmptyDir volume, the volume is created when the Pod is assigned to a node. <br>
+As the name says, the EmptyDir volume is initially empty. All containers in the Pod can read and write the same files in the emptyDir volume, though that volume can be mounted at the same or different paths in each container.<br>
+When a Pod is removed from a node for any reason, the data in the EmptyDir is <strong>deleted permanently<strong>.
+
+For more detail: [EmprtyDir {} Volume](https://kubernetes.io/docs/concepts/storage/volumes/#emptydir)
 
 --
 <a name="kube_kubectl"></a>
