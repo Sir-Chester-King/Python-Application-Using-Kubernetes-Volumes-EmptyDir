@@ -9,9 +9,9 @@ def Store_Data_Into_Volume(user):
 
     # Check if the directory inside the volume exist or not.
     # In case it doesn't exist, it is created.
+    # Going one level up -> /Docker_Directory/Storage/
     directory_storage = os.path.dirname(path_volume_docker)
 
-    # Check if the "Storage" directory exist, in case it does not exit, it created.
     if not os.path.exists(directory_storage):
         os.makedirs(directory_storage)
         print(f"Created directory: {directory_storage}")

@@ -12,6 +12,7 @@ def list_users_volume():
     # This is the PATH inside the Docker Container Volume
     path_volume_docker = "/Docker_Directory/Storage/User_Data.txt"
 
+    # Going one level up -> /Docker_Directory/Storage/
     directory_storage = os.path.dirname(path_volume_docker)
 
     # Check if the directory inside the volume exist or not.
