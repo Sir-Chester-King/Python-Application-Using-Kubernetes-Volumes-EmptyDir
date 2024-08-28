@@ -12,6 +12,7 @@
     - [Kubernetes Components](#kube_components)
     - [Kubernetes API Server](#kube_api)
     - [Kubernetes Objects](#kube_objects)
+    - [Kubernetes Volumes EmptyDir {}](#kube_volumes_emptydir)
     - [Kubectl](#kube_kubectl)
     - [Minikube - Local Kubernetes Cluster Instance](#minikube)
 * [Run Python Application In A Pod](#run_python_app_pod)
@@ -166,7 +167,6 @@ CMD ["python", "./Main_Code/main.py"]
 <a name="build_image"></a>
 ### Build Docker Image
 To build image, you must use the <strong> BUILD </strong> command, and pass where the dockerfile is stored, as a parameter.<br>
-It be the result.<br>
 
 ```
 # If you ware in the same directory (as path) of where Dockerfile is stored, you can pass it as " . " argument.
@@ -280,11 +280,6 @@ To do that, after the minikube installation, start the minikube with the followi
 minikube start
 ```
 
-If the start was successfull, you will able to see something like that:
-![Alt text](Readme_Screen/kube_start_successfull.png)
-You can see that via Docker Hub too:
-![Alt text](Readme_Screen/docker_hub_minikube.png)
-
 2) Verify the status of local Cluster
 To verify the integrity of the local cluster, you have two ways:
 - Minikube command
@@ -309,10 +304,11 @@ You will able to see:
 This explain is all up and running.
 
 3) Build the Docker Image
+Tag the name of image a with the name the DockerHub Public Repository, that will be used by Kubernetes Deployment (in mu case sirchesterking/kubernetes-volumes-emprydir).<br>
 To build the Docker image, you must use the following command:
 ```
 # We use the direectory " . ", 'cause when apply this command, we are int the same directory of Dockerfile.
-docker buil -t python_app_image .
+docker buil -t sirchesterking/kubernetes-volumes-emprydir .
 ```
 
 To view the list of image:
@@ -323,23 +319,11 @@ docker image ls
 4) Push the Docker image to a public repository
 To use the image for our pods in the Cluster, we must use a public repository to pull the image and use it in the container's pods.<br>
 In this case, we use the public repository on [Docker Hub](https://hub.docker.com).<br>
-To pull the image, we need an accessible reporitory, so make sure to create a <b>public repository</b>.<br>
+To pull the image, we need an accessible repository, so make sure to create a <b>public repository</b>.<br>
 <br>
-To push the image created in the previously steps, we must rename the image into the Public Repository.<br>
-
-My repository is:
-
-![Alt text](Readme_Screen/public_repo.png)
-
-So we must rename the image as the name of public repository.<br>
-
-To do that:
-```
-docker tag python_app_image sirchesterking/kubernetes-app-python
-```
 
 <b>Old Image</b>: python_app_image
-<b>New Image</b>: sirchesterking/kubernetes-app-python (name of public repository)
+<b>New Image</b>: sirchesterking/kubernetes-volumes-emprydir (name of public repository)
 <br>
 
 Before to push the image in the public repository, you must login via terminal to docker hub adn provide username and password:
@@ -351,15 +335,8 @@ docker login
 After that, you can push the image in the public repository, using the following command:
 ```
 # We provided the name:tag
-docker push sirchesterking/kubernetes-app-python:latest
+docker push sirchesterking/kubernetes-volumes-emprydir
 ```
-
-You will able to see via terminal:
-![Alt text](Readme_Screen/push_terminal.png)
-
-And you will able to via in the Public Repository of Docker Hub:
-![Alt text](Readme_Screen/push_public_repo.png)
-
 
 5) Deploy the Kubernetes Deployment
 After the push of the image in the public repository, you can deploy the Kubernetes Deployment Object.<br>
@@ -368,14 +345,14 @@ To review all the components inside the Deployment.yaml file, you can view [here
 To deploy the <strong>Deployment Object</strong> in the Kubernetes Cluster, you must use:
 ```
 # After the -f option, you must provide the name of the Deployment.yaml file.
-kubectl apply -f kubernetes_deployment.yaml
+kubectl apply -f Kubernetes_Deployment.yaml
 ```
 
 You will able to see via terminal:
 ![Alt text](Readme_Screen/deploy_create_terminal.png)
 
 
-6) Deploy the Kubernetes Deployment
+6) View the Kubernetes Deployment
 To view the <b>Deployment</b>, you have two ways:
 - Kubectl command
 - Minikube Dashboard
@@ -385,7 +362,7 @@ Using the Kubectl command, you must use:
 ```
 kubectl get deployment
 ```
-You will able to see via terminal:
+You will able to see via terminal something like this:
 ![Alt text](Readme_Screen/get_deploy_terminal.png)
 
 6.2) Minikube Dashboard
@@ -404,8 +381,7 @@ To view the <b>Pods</b> that are created automatically after the deployment (tha
 ```
 kubectl get pod
 ```
-You will able to see via terminal:
-![Alt text](Readme_Screen/get_pod_terminal.png)
+
 
 7) Run the appllication
 After you did all the above steps, you can run the python application.<br>
