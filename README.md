@@ -340,7 +340,7 @@ docker push sirchesterking/kubernetes-volumes-emprydir
 5) Deploy the Kubernetes Deployment
 After the push of the image in the public repository, you can deploy the Kubernetes Deployment Object.<br>
 To do that, you must create, before, the Deployment.yaml file, that will contain all the attributes and the specification of the desired behavior of the Deployment.
-To review all the components inside the Deployment.yaml file, you can view [here](https://github.com/Sir-Chester-King/Python_App_Using_Kubernetes/blob/main/kubernetes_deployment.yaml).<br>
+To review all the components inside the Deployment.yaml file, you can view [here](https://github.com/Sir-Chester-King/Python-Application-Using-Kubernetes-Volumes-EmptyDir/blob/main/Kubernetes_Deployment.yaml).<br>
 To deploy the <strong>Deployment Object</strong> in the Kubernetes Cluster, you must use:
 ```
 # After the -f option, you must provide the name of the Deployment.yaml file.
