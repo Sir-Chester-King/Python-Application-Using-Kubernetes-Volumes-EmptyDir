@@ -402,9 +402,12 @@ You will able to see via terminal:
 ![Alt text](Readme_Screen/bash_container_tree.png)
 
 As you can see, you now have access to a container inside the Pod.<br>
-![Alt text](Readme_Screen/list_container_tree.png)
+Go under the Main_Code sirectory using:
+```
+cd Main_Code/
+```
 
-So now, you can run the python application:
+Nnow, you can run the python application:
 ```
 python Main_Code/main.py
 ```
@@ -419,9 +422,15 @@ To list the containers inside the Pod, you must use:
 ```
 kubectl describe pod <pod-name>
 ```
+
 In the output, look for a section like this:
 ![Alt text](Readme_Screen/container_pod_describe.png)
 
+As you can see, in the output of the code, it's able to see the mounted volume in the container
+![Alt text](Readme_Screen/mount_view_1.png)
+
+And
+![Alt text](Readme_Screen/mount_view_2.png)
 
 ---
 ## Author
