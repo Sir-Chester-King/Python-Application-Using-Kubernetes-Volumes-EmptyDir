@@ -236,8 +236,7 @@ For more detail: [Kubernetes Objects](https://kubernetes.io/docs/concepts/overvi
 ## Kubernetes Volumes EmptyDir {}
 The Kubernetes offers the possibilities to store data in a Volume.<br>
 In this case it used the <mark>EmptyDir {} Volume.</mark>.<br>
-For a Pod that defines an EmptyDir volume, the volume is created when the Pod is assigned to a node. <br>
-As the name says, the EmptyDir volume is initially empty. All containers in the Pod can read and write the same files in the emptyDir volume, though that volume can be mounted at the same or different paths in each container.<br>
+For a Pod that defines an EmptyDir volume, the volume is created when the Pod is assigned to a node. As the name says, the EmptyDir volume is initially empty. All containers in the Pod can read and write the same files in the emptyDir volume, though that volume can be mounted at the same or different paths in each container.
 When a Pod is removed from a node for any reason, the data in the EmptyDir is <strong>deleted permanently<strong>.
 
 For more detail: [EmprtyDir {} Volume](https://kubernetes.io/docs/concepts/storage/volumes/#emptydir)
