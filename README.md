@@ -20,7 +20,7 @@
 <a name="description"></a>
 ## Description
 This application allow to user to store into a file saome User's data info, such as Name, Surname, Address and Phone Number; and view the data stored too.<br>
-The storing of data are set in a file, and this file, will be stored into a <mark>Pod's Volume</mark>.<br>
+The storing of data are set in a file, and this file, will be stored into a <mark>Pod's Volume</mark> using the specification <strong>EmptyDir {}</strong>.<br>
 The purpose of this app is to understand how to deploy, run and store data inside <em>Pod's Volume</em><br>
 The application works via Terminal bash, not GUI.<br>
 Application is structured as:
