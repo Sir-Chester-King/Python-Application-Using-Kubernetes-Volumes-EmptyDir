@@ -1,0 +1,89 @@
+# YAML MANIFEST
+
+# Specify the version of API.
+# You can use the Kubernetes API to read and write Kubernetes resource objects via a Kubernetes API endpoint.
+# APIVersion defines the versioned schema of this representation of an object.
+apiVersion: apps/v1
+
+# Type of object we want to deploy in the Kubernetes Cluster.
+kind: Deployment
+
+# Standard object's metadata.
+metadata:
+
+  # Name of the deployment.
+  name: deployment-using-volumes
+
+# Specification of the desired behavior of the Deployment.
+spec:
+
+  # The "Replicas" are the "Pods" (Pods are a virtual machine that will contain the cointainer with the app inside the container).
+  replicas: 1
+
+  # Label selector for pods.
+  # Selector is used to identify and manage the pods that belong to the deployment.
+  selector:
+
+    # This is the label selector. It specifies that the Deployment will manage pods defined with the label {key:value}
+    matchLabels:
+      kubernetes-pod-label: kubernetes-pod-python-app-label
+
+  # Describe the Pod which should be created (Pod is an object in the Kubernetes world).
+  template:
+
+    # Standard object's metadata.
+    metadata:
+
+      # This defines the labels applied to the pods created by the Deployment. {key:value}
+      labels:
+        kubernetes-pod-label: kubernetes-pod-python-app-label
+    
+    # Specification of the desired behavior of the pod.
+    spec:
+
+      # List of containers belonging to the pod. 
+      # Containers cannot currently be added or removed. 
+      # There must be at least one container in a Pod. Cannot be updated.
+      containers:
+        - name: container-python-app
+          image: sirchesterking/kubernetes-using-volume
+
+          # Whether this container should allocate a buffer for stdin in the container runtime. 
+          # If this is not set, reads from stdin in the container will always result in EOF. 
+          # Default is false.
+          stdin: true
+
+          # Whether this container should allocate a TTY for itself, also requires 'stdin' to be true. 
+          # Default is false.
+          tty: true
+
+
+          # Defining where the Volume will be mounted inside the Docker container; which path.
+          volumeMounts:
+
+            # Path inside the container where will be mounted the volume.
+            - mountPath: /Docker_Directory/Storage
+
+              # Defined which volume will be mounted in the defined path (the name of volume is defined in the "volumes" specification).
+              name: kubernetes-volume
+
+          # Declared the resource limits for containers.
+          # It's crucial for ensuring that applications run efficiently and do not starve other processes on the same node.
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+
+      # Specification of the Volumes type, behavior, etc...
+      volumes:
+
+        # Name of the volume.
+        - name: kubernetes-volume
+
+          # Using the emptyDir, the volume is created when the Pod is assigned to a WorkNode, but if the
+          # Pod is removed for any reason, the volume will be removed too.
+          emptyDir: { }
+              
