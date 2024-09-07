@@ -19,10 +19,10 @@
 ---
 <a name="description"></a>
 ## Description
-This application allow to user to store into a file some User's data info, such as Name, Surname, Address and Phone Number; and view the data stored too.<br>
-The storing of data are set in a file, and this file, will be stored into a <mark>Pod's Volume</mark> using the specification <strong>EmptyDir {}</strong>.<br>
-The purpose of this app is to understand how to deploy, run and store data inside <em>Pod's Volume</em><br>
-The application works via Terminal bash, not GUI.<br>
+This application enables users to store and view personal information, including Name, Surname, Address, and Phone Number, in a file.<br>
+The data is stored in a file within a <mark>pod's volume</mark>, utilizing the <strong>emptyDir</strong> volume specification.<br>
+The primary goal of this application is to demonstrate the deployment, execution, and management of data storage within a pod’s volume in a Kubernetes environment.<br>
+It operates via a command-line interface (CLI) rather than a graphical user interface (GUI).
 Application is structured as:
 * Language: [Python](https://www.python.org)
 * Container Engine: [Docker](https://www.docker.com)
