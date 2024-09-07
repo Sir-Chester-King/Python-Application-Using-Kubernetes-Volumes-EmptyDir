@@ -1,4 +1,4 @@
-# Python Application Using <ins>**Kubernetes Cluster Volumes EmptyDir {}**</ins>
+# Python Application Using <ins>**Kubernetes Cluster Volumes EmptyDir{}**</ins>
 
 ## Table Of Contents
 * [Description](#description)
@@ -11,7 +11,7 @@
     - [Kubernetes Components](#kube_components)
     - [Kubernetes API Server](#kube_api)
     - [Kubernetes Objects](#kube_objects)
-    - [Kubernetes Volumes EmptyDir {}](#kube_volumes_emptydir)
+    - [Kubernetes Volumes EmptyDir{}](#kube_volumes_emptydir)
     - [Kubectl](#kube_kubectl)
     - [Minikube - Local Kubernetes Cluster Instance](#minikube)
 * [Run Python Application In A Pod](#run_python_app_pod)
@@ -19,7 +19,7 @@
 ---
 <a name="description"></a>
 ## Description
-This application allow to user to store into a file saome User's data info, such as Name, Surname, Address and Phone Number; and view the data stored too.<br>
+This application allow to user to store into a file some User's data info, such as Name, Surname, Address and Phone Number; and view the data stored too.<br>
 The storing of data are set in a file, and this file, will be stored into a <mark>Pod's Volume</mark> using the specification <strong>EmptyDir {}</strong>.<br>
 The purpose of this app is to understand how to deploy, run and store data inside <em>Pod's Volume</em><br>
 The application works via Terminal bash, not GUI.<br>
@@ -232,13 +232,13 @@ For more detail: [Kubernetes Objects](https://kubernetes.io/docs/concepts/overvi
 
 --
 <a name="kube_volumes_emptydir"></a>
-## Kubernetes Volumes EmptyDir {}
+## Kubernetes Volumes EmptyDir{}
 The Kubernetes offers the possibilities to store data in a Volume.<br>
-In this case it used the <mark>EmptyDir {} Volume.</mark>.<br>
+In this case it used the <mark>EmptyDir{} Volume.</mark>.<br>
 For a Pod that defines an EmptyDir volume, the volume is created when the Pod is assigned to a node. As the name says, the EmptyDir volume is initially empty. All containers in the Pod can read and write the same files in the emptyDir volume, though that volume can be mounted at the same or different paths in each container.
 When a Pod is removed from a node for any reason, the data in the EmptyDir is <strong>deleted permanently<strong>.
 
-For more detail: [EmprtyDir {} Volume](https://kubernetes.io/docs/concepts/storage/volumes/#emptydir)
+For more detail: [EmprtyDir{} Volume](https://kubernetes.io/docs/concepts/storage/volumes/#emptydir)
 
 --
 <a name="kube_kubectl"></a>
